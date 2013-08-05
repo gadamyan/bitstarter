@@ -1,0 +1,35 @@
+{% load development %}
+{% dev %}
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{STATIC_URL}}lib/jquery_selectmenu/ui.selectmenu.css" />
+<!-- Base Libraries -->
+<script src="{{STATIC_URL}}lib/jquery.js"></script>
+<script src="{{STATIC_URL}}lib/jquery.history.js"></script>
+<script src="{{STATIC_URL}}lib/jquery_ui/jquery-ui.min.js"></script>
+<script src="{{STATIC_URL}}lib/jquery.tmpl.min.js"></script>
+<script src="{{STATIC_URL}}lib/signals.min.js"></script>
+<script src="{{STATIC_URL}}lib/jscollections/map.js"></script>
+<!-- Bootstrap -->
+</script>
+<script src="{{STATIC_URL}}lib/bootstrap/js/bootstrap-tooltip.js"></script>
+<script src="{{STATIC_URL}}lib/bootstrap/js/bootstrap-popover.js"></script>
+<!-- Extra -->
+<script src="{{STATIC_URL}}lib/date.js"></script>
+<script src="{{STATIC_URL}}lib/jquery.tablesorter.min.js"></script>
+<!-- Application Scripts -->
+<script src="{{STATIC_URL}}js/exceptions.js"></script>
+<script src="{{STATIC_URL}}js/main.js"></script>
+<script src="{{STATIC_URL}}js/controller.js"></script>
+<!-- Create Metric specific -->
+<script src="{{STATIC_URL}}js/stat.js"></script>
+<script src="{{STATIC_URL}}lib/codemirror/codemirror.js"></script>
+<script src="{{STATIC_URL}}lib/codemirror/python.js"></script>
+<!-- Update Metric specific -->
+<script src="{{STATIC_URL}}lib/jquery.deserialize.js"></script>
+<script src="{{STATIC_URL}}lib/jquery_selectmenu/ui.selectmenu.js">
+</script>
+{% else %}
+<script src="{{STATIC_URL}}js/all.1e4d96b599.js" x-nocompress="true" x-alljs="true">
+</script>
+{% enddev %}
+<!-- end -->

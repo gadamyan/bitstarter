@@ -1,8 +1,14 @@
 {
-  "name": "node-example",
+  "name": "junior-game-Developer",
   "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "express": "2.5.x"
+    "express": "3.3.1",
+    "jade": "*",
+    "less-middleware": "*"
   },
   "engines": {
     "node": "0.8.x",

@@ -1,0 +1,107 @@
+/**
+ *  History class scope
+ *
+ *  Loads the pages
+ */
+
+
+
+
+
+
+
+
+var History;
+
+(function($) {
+
+  "use strict";
+
+  var signal_loaded;
+
+  // constructor
+  var _History = function() {
+    _callPrivate(this, 'init');
+  };
+
+  var methods = {
+    loadPage: function(page) {
+      var self = this;
+      page = page.replace(/\_dc_.*$/, '');
+      $('#layout').load(page, function(){
+        console.log(page + "-----");
+        _callPrivate(self, 'loadHandler', [page]); 
+        signal_loaded.dispatch();
+      });
+    },
+
+    loadHandler: function(page){
+      var v = page.split('/'),
+          action = '';
+      if ("" == v[v.length - 1]) {
+        v.splice(v.length - 1);
+      }
+      if (v.length > 0) {
+        action = v[0] + v[1].substr(0, 1).toUpperCase()
+                      + v[1].substr(1) + "Action";
+        if ("undefined" != typeof Controller[action]) {
+          if (v.length > 2) {
+            Controller[action].apply(Controller, v.slice(2));
+          } else {
+            Controller[action]();
+          }
+        }
+      }
+    },
+
+    load: function(url, fn) {
+      signal_loaded.addOnce(function() {
+        if ("undefined" != typeof fn) {
+          fn();
+        }
+      });
+      $.history.load(url + '_dc_' + randomString());
+    },
+
+    init: function() {
+      var self = this;
+      signal_loaded = new signals.Signal();
+      $.history.init(function(url) {
+        if ($.isEmptyObject(url)) {
+          _callPrivate(self, 'load', ["index/ajax/"]);
+        } else {
+          _callPrivate(self, 'loadPage', [url]);
+        }
+      }, { unescape: ",/" });
+    }
+  };
+
+  // calls a function or a set of functions
+  // from a private scope
+  var _callPrivate = function (scope, fn, args) {
+    if ('array' === typeof(fn) || ('object' === typeof(fn) && fn.length)) {
+      for (var i in fn) {
+        if ('function' === typeof methods[fn[i]]) {
+          methods[fn[i]].apply(scope, args); 
+        }
+      }
+    } else if ('function' === typeof methods[fn]) {
+      return methods[fn].apply(scope, args); 
+    }
+  };
+
+  _History.prototype = {
+    constructor: _History,
+
+    load: function(url, fn) {
+      _callPrivate(this, 'load', arguments);
+    }
+  };
+
+  $(function() {
+    /*jshint newcap:false */  
+    History = new _History();
+    /*jshint newcap:true */  
+  });
+})(jQuery);
+

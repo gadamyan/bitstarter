@@ -1,0 +1,10 @@
+body {
+  font-family: "Lora",Georgia,"Times New Roman",Times,serif;
+  font-size: 18px;
+  color: #333;
+  background-color: #ffffff;
+}
+
+.navbar-inner {
+  background-image: linear-gradient(to bottom,#ddd,#d1d1d1);
+}
